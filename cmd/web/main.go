@@ -12,6 +12,11 @@ type config struct {
 	staticDir string
 }
 
+type application struct {
+	InfoLog  *log.Logger
+	ErrorLog *log.Logger
+}
+
 func main() {
 	var cfg config
 
@@ -22,14 +27,19 @@ func main() {
 	infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
 	errorLog := log.New(os.Stderr, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
 
+	app := &application{
+		InfoLog:  infoLog,
+		ErrorLog: errorLog,
+	}
+
 	mux := http.NewServeMux()
 	fileServer := http.FileServer(http.Dir(cfg.staticDir))
 
 	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
 
-	mux.HandleFunc("/", home)
-	mux.HandleFunc("/snippet/view", snippetView)
-	mux.HandleFunc("/snippet/create", snippetCreate)
+	mux.HandleFunc("/", app.home)
+	mux.HandleFunc("/snippet/view", app.snippetView)
+	mux.HandleFunc("/snippet/create", app.snippetCreate)
 
 	srv := &http.Server{
 		Addr:     cfg.addr,
