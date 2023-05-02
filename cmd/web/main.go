@@ -13,8 +13,8 @@ type config struct {
 }
 
 type application struct {
-	InfoLog  *log.Logger
-	ErrorLog *log.Logger
+	infoLog  *log.Logger
+	errorLog *log.Logger
 }
 
 func main() {
@@ -28,8 +28,8 @@ func main() {
 	errorLog := log.New(os.Stderr, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
 
 	app := &application{
-		InfoLog:  infoLog,
-		ErrorLog: errorLog,
+		infoLog:  infoLog,
+		errorLog: errorLog,
 	}
 
 	mux := http.NewServeMux()
