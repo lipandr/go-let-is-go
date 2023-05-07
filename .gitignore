@@ -9,6 +9,7 @@
 *.dylib
 *.iml
 *.xml
+cmd/web/snippetboxApp
 
 # Test binary, built with `go test -c`
 *.test
