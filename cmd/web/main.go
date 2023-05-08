@@ -77,6 +77,9 @@ func openDB(dsn string) (*sql.DB, error) {
 
 func connectDB() *sql.DB {
 	dsn := os.Getenv("DSN")
+	if dsn == "" {
+		dsn = "snippetbox:password@tcp(127.0.0.1:3306)/snippetbox?parseTime=true"
+	}
 	for {
 		conn, err := openDB(dsn)
 		if err != nil {
