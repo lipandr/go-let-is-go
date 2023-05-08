@@ -9,6 +9,7 @@
 *.dylib
 *.iml
 *.xml
+cmd/web/snippetboxApp
 
 # Test binary, built with `go test -c`
 *.test
@@ -18,6 +19,7 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+db-data
 
 # Go workspace file
 go.work
